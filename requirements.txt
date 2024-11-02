@@ -1,5 +1,5 @@
-toml
-urllib
-xml
-json
-requests
+toml==0.10.2
+requests==2.32.3
+streamlit==1.39.0
+pdfplumber==0.11.4
+PyMuPDF==1.24.13
