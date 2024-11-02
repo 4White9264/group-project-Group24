@@ -15,7 +15,7 @@ def answer(article_summary, translation = "English"):
 
     # 构建对比 prompt
     system_prompt = f"""
-    This is a summary of a academic paper, please help me to summarize it into a few sentences in {translation}.
+    You are an academic assistant, please help me to analyse some articles in {translation}.
     """
 
     # 构建消息
@@ -29,7 +29,7 @@ def answer(article_summary, translation = "English"):
         headers={"Authorization": f"Bearer {OPENROUTER_API_KEY}"},
         data=json.dumps({ 
             "messages": messages,
-            "model": "openai/chatgpt-4o-latest"
+            "model": "openai/gpt-4o-mini-2024-07-18"
         })
     )
 
