@@ -29,12 +29,12 @@ def answer(article_summary, translation = "English"):
         headers={"Authorization": f"Bearer {OPENROUTER_API_KEY}"},
         data=json.dumps({ 
             "messages": messages,
-            "model": "meta-llama/llama-3.1-70b-instruct:free"
+            "model": "openai/gpt-4o-mini-2024-07-18"
         })
     )
 
     # 打印响应的 JSON 数据以进行调试
-    print("Response JSON:", response.json())
+    # print("Response JSON:", response.json())
 
     # 检查响应状态码
     if response.status_code != 200:
