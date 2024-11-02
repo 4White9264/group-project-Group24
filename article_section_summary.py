@@ -1,3 +1,5 @@
+# Author: Zehao ZHANG 24069596g
+
 import fitz  # PyMuPDF
 from arxiv_api_integration_ai_connect import answer
 import json
@@ -30,12 +32,6 @@ def pdf_to_txt(pdf_name):
     for i in range(len(pdf_document)):
         page = pdf_document.load_page(i)
         text = extract_text_without_images(page)
-        
-        '''
-        text_list = text.split('\n')
-        filtered_text_list = list(filter(lambda x: x and x.strip(), text_list))
-        text = '\n'.join(filtered_text_list)
-        '''
         pdf_txt += text + '\n'
         
     # 过滤或处理文本
