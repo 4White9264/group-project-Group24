@@ -16,7 +16,7 @@ def arxiv_api_calling(article_title, translation):
 
     method_name = "query"
     start = 0
-    max_results = 30
+    max_results = 29
 
     # 对参数进行编码
     encoded_article_title = urllib.parse.quote(article_title)
