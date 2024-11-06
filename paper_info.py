@@ -55,6 +55,7 @@ if __name__ == "__main__":
                 summary = publication_info.get("summary", "N/A")
                 authors = publication_info.get("authors", [])
                 author_info = ", ".join([author.get("name", "N/A") for author in authors])
+                cited_by = result.get("inline_links", {}).get("cited_by", {}).get("total", "N/A")
                 
                 # 从summary中提取期刊名称
                 journal_name = "N/A"
@@ -67,6 +68,7 @@ if __name__ == "__main__":
                 print(f"Summary: {summary}")
                 print(f"Authors: {author_info}")
                 print(f"Journal: {journal_name}")
+                print(f"Cited by: {cited_by}")
                 
                 # 从jcr.xls中获取期刊信息
                 journal_info = get_journal_info(journal_name, 'jcr.xls')
