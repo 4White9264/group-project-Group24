@@ -78,7 +78,7 @@ def arxiv_api_calling(article_title, translation):
 
 
 # 调用函数
-article_title = "Self-Modeling Based Diagnosis of Software-Defined Networks"
+article_title = "Examining Human-AI Collaboration for Co-Writing Constructive Comments Online"
 translation = "English"
 article = arxiv_api_calling(article_title, translation)
 
