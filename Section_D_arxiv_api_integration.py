@@ -37,6 +37,8 @@ def arxiv_api_calling(article_title, translation):
     article = {}
     for entry in root.findall('{http://www.w3.org/2005/Atom}entry'):
 
+        
+
         if entry.find('{http://www.w3.org/2005/Atom}title').text == article_title:
 
             # # Print the XML data，调试
