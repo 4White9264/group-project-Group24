@@ -33,21 +33,26 @@ def get_journal_info(journal_name, file_path):
     return journal_info
 
 # 示例调用
-if __name__ == "__main__":
+#if __name__ == "__main__":
+def get_paper_detailed_info(title):
     config = read_config('config.txt')
-    
+    '''
     if len(sys.argv) < 2:
         print("Usage: python paper_info.py <paper_title>")
         sys.exit(1)
-    
-    paper_title = sys.argv[1]
-    
+    '''
+    paper_title = title
+    paper_info_dict = {}
+
     print(f"Retrieving information for paper: {paper_title}")
     paper_info = get_paper_info(paper_title, config)
     if paper_info:
         organic_results = paper_info.get("organic_results", [])
         if organic_results:
-            for result in organic_results:
+            for i in range(len(organic_results)):
+                if i > 0:
+                    break
+                result = organic_results[i]
                 title = result.get("title", "N/A")
                 link = result.get("link", "N/A")
                 snippet = result.get("snippet", "N/A")
@@ -69,7 +74,18 @@ if __name__ == "__main__":
                 print(f"Authors: {author_info}")
                 print(f"Journal: {journal_name}")
                 print(f"Cited by: {cited_by}")
-                
+                # 创建一个空字典
+
+                # 添加单个元素
+                paper_info_dict["Title"] = title
+                paper_info_dict["Link"] = link
+                paper_info_dict["Snippet"] = snippet
+                paper_info_dict["Summary"] = summary
+                paper_info_dict["Authors"] = author_info
+                paper_info_dict["Journal"] = journal_name
+                paper_info_dict["Cited by"] = cited_by
+
+
                 # 从jcr.xls中获取期刊信息
                 journal_info = get_journal_info(journal_name, 'jcr.xls')
                 if not journal_info.empty:
@@ -80,11 +96,19 @@ if __name__ == "__main__":
                         print(f"2022 JIF: {jif}")
                         print(f"JIF Quartile: {quartile}")
                         print(f"Category: {category}")
+                        paper_info_dict["2022 JIF"] = jif
+                        paper_info_dict["JIF Quartile"] = quartile
+                        paper_info_dict["Category"] = category
                 else:
                     print("No matching journal found in jcr.xls")
+                    paper_info_dict["2022 JIF"] = "N/A"
+                    paper_info_dict["JIF Quartile"] = "N/A"
+                    paper_info_dict["Category"] = "N/A"
                 
                 print("\n")
         else:
             print("No organic results found.")
     else:
         print("Error retrieving paper information")
+    
+    return paper_info_dict

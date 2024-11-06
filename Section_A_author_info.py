@@ -37,8 +37,8 @@ def get_author_info(name, config):
         "affiliation": author.get('affiliations', 'N/A'),
         "email": author.get('email', 'N/A'),
         "interests": author.get('interests', 'N/A'),
-        "position": author.get('position', 'N/A'),
-        "research_areas": author.get('research_areas', 'N/A'),
+        # "position": author.get('position', 'N/A'),
+        # "research_areas": author.get('research_areas', 'N/A'),
         "top3_publications": [pub.get('title', 'N/A') for pub in author.get('publications', [])[:3]],
         "google_scholar_profile": author.get('link', 'N/A'),
         "search_link": search_link
@@ -105,17 +105,18 @@ def summarize_output(output, config):
         raise Exception(f"API 请求失败，状态码: {response.status_code}, 错误信息: {response.json()}")
 
 # 示例调用
-if __name__ == "__main__":
+def get_author_detailed_info(first_author):
     config = read_config('config.txt')
-    
+    '''
     if len(sys.argv) < 2:
         print("Usage: python author_info.py <author_name>")
         sys.exit(1)
+    '''
+    author_name = first_author
     
-    author_name = sys.argv[1]
-    
-    print(f"Retrieving information for author: {author_name}")
+    print(f"Retrieving information for author_1: {author_name}")
     author_info = get_author_info(author_name, config)
+    
     if author_info:
         output = "Author Info:\n"
         for key, value in author_info.items():
@@ -125,6 +126,7 @@ if __name__ == "__main__":
         additional_info = None
         if author_info["google_scholar_profile"] != 'N/A':
             additional_info = get_additional_info(author_info["google_scholar_profile"], config)
+            author_info["top3_publications"] = additional_info["top3_publications"]
             if additional_info:
                 output += "\nAdditional Info:\n"
                 for key, value in additional_info.items():
@@ -143,10 +145,65 @@ if __name__ == "__main__":
             summary = summarize_output(output, config)
             print("\nSummary:\n")
             print(summary)
+            author_info["author_summary"] = summary
         except Exception as e:
             print(f"Error summarizing output: {e}")
     else:
         print("Error retrieving author information")
+
+    print(f"Retrieving information for author_2: {author_name}")
+    author_id = get_author_id(author_name, config)
+    if author_id:
+        author_details = get_author_details(author_id, config)
+        if author_details:
+            interests = author_details.get("interests", [])
+            cited_by = author_details.get("cited_by", {}).get("table", [])
+            
+            h_index = "N/A"
+            i10_index = "N/A"
+            total_citations = "N/A"
+            
+            for item in cited_by:
+                if item.get("citations", {}).get("all", "N/A") != "N/A":
+                    total_citations = item["citations"]["all"]
+                if item.get("h_index", {}).get("all", "N/A") != "N/A":
+                    h_index = item["h_index"]["all"]
+                if item.get("i10_index", {}).get("all", "N/A") != "N/A":
+                    i10_index = item["i10_index"]["all"]
+            
+            interests_formatted = ", ".join([interest.get("title", "N/A") for interest in interests])
+            
+            print(f"Interests: {interests_formatted}")
+            print(f"h-index: {h_index}")
+            print(f"i10-index: {i10_index}")
+            print(f"Cited by: {total_citations}")
+            
+            author_info["interests"] = interests_formatted
+            author_info["h_index"] = h_index
+            author_info["i10_index"] = i10_index
+            author_info["cited by"] = total_citations
+
+            # 计算评分
+            h_index_score, i10_index_score, total_citations_score, total_score = calculate_scores(h_index, i10_index, total_citations)
+            
+            print(f"\nh-index Score: {h_index_score:.2f}")
+            print(f"i10-index Score: {i10_index_score:.2f}")
+            print(f"Total Citations Score: {total_citations_score:.2f}")
+            print(f"Total Score: {total_score:.2f}")
+            print("\n")
+
+            author_info["h_index_score"] = h_index_score
+            author_info["i10_index_score"] = i10_index_score
+            author_info["total_citations_score"] = total_citations_score
+            author_info["total_score"] = total_score
+
+        else:
+            print("Error retrieving author information")
+    else:
+        print("Author ID not found")
+
+    
+    return author_info
 
 # 获取作者ID的函数
 def get_author_id(name, config):
@@ -181,52 +238,4 @@ def calculate_scores(h_index, i10_index, total_citations):
     total_score = h_index_score + i10_index_score + total_citations_score
     return h_index_score, i10_index_score, total_citations_score, total_score
 
-# 示例调用
-if __name__ == "__main__":
-    config = read_config('config.txt')
-    
-    if len(sys.argv) < 2:
-        print("Usage: python test.py <author_name>")
-        sys.exit(1)
-    
-    author_name = sys.argv[1]
-    
-    print(f"Retrieving information for author: {author_name}")
-    author_id = get_author_id(author_name, config)
-    if author_id:
-        author_details = get_author_details(author_id, config)
-        if author_details:
-            interests = author_details.get("interests", [])
-            cited_by = author_details.get("cited_by", {}).get("table", [])
-            
-            h_index = "N/A"
-            i10_index = "N/A"
-            total_citations = "N/A"
-            
-            for item in cited_by:
-                if item.get("citations", {}).get("all", "N/A") != "N/A":
-                    total_citations = item["citations"]["all"]
-                if item.get("h_index", {}).get("all", "N/A") != "N/A":
-                    h_index = item["h_index"]["all"]
-                if item.get("i10_index", {}).get("all", "N/A") != "N/A":
-                    i10_index = item["i10_index"]["all"]
-            
-            interests_formatted = ", ".join([interest.get("title", "N/A") for interest in interests])
-            
-            print(f"Interests: {interests_formatted}")
-            print(f"h-index: {h_index}")
-            print(f"i10-index: {i10_index}")
-            print(f"Cited by: {total_citations}")
-            
-            # 计算评分
-            h_index_score, i10_index_score, total_citations_score, total_score = calculate_scores(h_index, i10_index, total_citations)
-            
-            print(f"\nh-index Score: {h_index_score:.2f}")
-            print(f"i10-index Score: {i10_index_score:.2f}")
-            print(f"Total Citations Score: {total_citations_score:.2f}")
-            print(f"Total Score: {total_score:.2f}")
-            print("\n")
-        else:
-            print("Error retrieving author information")
-    else:
-        print("Author ID not found")
+
