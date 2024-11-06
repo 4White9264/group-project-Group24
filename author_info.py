@@ -147,15 +147,6 @@ if __name__ == "__main__":
             print(f"Error summarizing output: {e}")
     else:
         print("Error retrieving author information")
-    # 读取配置文件的函数
-def read_config(file_path):
-    config = {}
-    with open(file_path, 'r') as file:
-        for line in file:
-            if '=' in line:
-                key, value = line.strip().split('=', 1)
-                config[key] = value
-    return config
 
 # 获取作者ID的函数
 def get_author_id(name, config):
