@@ -2,7 +2,7 @@ from Section_D_arxiv_api_integration import arxiv_api_calling
 
 
 # 调用函数
-article_title = "Self-Modeling Based Diagnosis of Software-Defined Networks"
+article_title = "Noncommutative Poisson structure and invariants of matrices"
 translation = "English"
 article = arxiv_api_calling(article_title, translation)
 
