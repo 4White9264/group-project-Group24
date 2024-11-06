@@ -1,0 +1,15 @@
+output_dict = {
+    "summaries": {
+        'Abstract': 'This paper proposes a self-modeling based diagnosis system aimed at addressing challenges such as scalability and resiliency within Software-Defined Networks (SDN) and Network Functions Virtualization (NFV). The authors introduce templates for modeling network components, facilitating runtime generation of diagnosis models.',
+        'I. INTRODUCTION': 'The introduction discusses the significance of SDN and NFV in improving network management and reducing operational costs, highlighting challenges like resiliency that necessitate self-diagnosis mechanisms to enhance network recovery processes.',
+        'II. MOTIVATION': 'This section presents the challenges of modeling dependencies in dynamic SDN and NFV environments, focusing on the need for a self-modeling algorithm capable of adapting to runtime changes in both VNFs and network topologies.',
+        'III. RELATED WORK ON MODEL-BASED DIAGNOSIS': 'The related work section reviews existing model-based diagnosis approaches, identifying limitations in granularity and dynamic modeling, and sets the stage for the proposed enhancements in the current work.',
+        'IV. SELF-MODELING BASED DIAGNOSIS FRAMEWORK': 'This section outlines the framework for the self-modeling diagnosis process, including template definitions and methods for constructing a global dependency graph from network topology.',
+        'V. VALIDATION OF DIAGNOSIS MODULE': 'The validation confirms the effectiveness of the proposed self-modeling diagnosis system through various tests in a simulated SDN environment, demonstrating model generation and diagnosis performance under different conditions.',
+        'VI. CONCLUSIONS AND FUTURE WORK': 'The conclusion reviews the main achievements of the proposed diagnosis framework and outlines future research directions focused on reducing uncertainty in diagnosis and enhancing learning capabilities within the model.'
+    },
+    "related_work": {
+        "Self-Modeling Based Diagnosis of Software-Defined Networks": "The related work highlights existing approaches to model-based diagnosis primarily focused on static topologies, discussing their shortcomings in handling dynamically changing environments, especially in the context of SDN and NFV. The paper advances the state of the art by proposing a self-modeling diagnosis that dynamically constructs dependency graphs while considering finer granularities of network components."
+    },
+    "logical_chain": "The article presents a comprehensive argumentation process that starts by identifying key challenges in diagnosing software-defined and virtualized network environments, leading to the proposal of a self-modeling framework that systematically constructs detailed dependency graphs necessary for effective diagnosis. The method enhances diagnosis granularity and automation while addressing the limitations of existing models, establishing a well-supported case for improving network resiliency through self-diagnosing capabilities."
+}
