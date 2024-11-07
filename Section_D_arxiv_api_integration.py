@@ -33,9 +33,12 @@ def arxiv_api_calling(article_title, translation):
     # 解析 XML 数据
     root = ET.fromstring(data)
 
+    # print(root)
+
     # 提取文章信息
     article = {}
     for entry in root.findall('{http://www.w3.org/2005/Atom}entry'):
+        # print(ET.tostring(entry, encoding='utf-8').decode('utf-8'))
 
         
 
@@ -62,8 +65,8 @@ def arxiv_api_calling(article_title, translation):
             if pdf_link is not None:
                 article['pdf_link'] = pdf_link.attrib['href']
             
-    summarized_article = answer(article['summary'], translation)
-    article['summarized summary'] = summarized_article
+    # summarized_article = answer(article['summary'], translation)
+    # article['summarized summary'] = summarized_article
 
     # 调用函数，下载 PDF 文件
     try:
@@ -78,3 +81,7 @@ def arxiv_api_calling(article_title, translation):
 
 
 
+# # 调用函数
+# article_title = "Noncommutative Poisson structure and invariants of matrices"
+# translation = "English"
+# article = arxiv_api_calling(article_title, translation)
