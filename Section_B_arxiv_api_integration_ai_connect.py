@@ -1,22 +1,12 @@
 import requests
 import json
-import toml
-import os
-
-# Load API key from secrets.toml
-file_path = 'Section_B_credentials_ZZH.txt'
-if os.path.exists(file_path):
-    with open(file_path, 'r') as f:
-        secrets = toml.load(f)
-
-OPENROUTER_API_KEY = secrets['OPENROUTER']['OPENROUTER_API_KEY']
+# 从settings.py中导入全局变量
+from Section_B_settings import OPENROUTER_API_KEY, SYSTEM_PROMPT, MODEL, AI_URL
 
 def answer(article_summary, translation = "English"):
 
     # 构建对比 prompt
-    system_prompt = f"""
-    You are an academic assistant, please help me to analyse some articles in {translation}.
-    """
+    system_prompt = SYSTEM_PROMPT.replace("{translation}", translation)
 
     # 构建消息
     messages = [
@@ -25,11 +15,11 @@ def answer(article_summary, translation = "English"):
     ]
 
     response = requests.post(
-        url="https://openrouter.ai/api/v1/chat/completions",
+        url = AI_URL,
         headers={"Authorization": f"Bearer {OPENROUTER_API_KEY}"},
         data=json.dumps({ 
             "messages": messages,
-            "model": "openai/gpt-4o-mini-2024-07-18"
+            "model": MODEL
         })
     )
 

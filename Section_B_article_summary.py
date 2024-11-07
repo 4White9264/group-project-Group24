@@ -2,6 +2,8 @@
 
 import fitz  # PyMuPDF
 from Section_B_arxiv_api_integration_ai_connect import answer
+# 从settings.py中导入全局变量
+from Section_B_settings import USER_PROMPT
 import json
 
 # 提取一页的文本
@@ -48,11 +50,9 @@ def pdf_to_txt(pdf_name):
 # 文件名可从用户上传的文件中读取，文章名由另一section提供
 def get_context_and_feedback_from_ai(pdf_name, article_name, translation = "English"):
     pdf_to_txt(pdf_name)
-    with open("Section_B_prompt.txt", "r") as f:
-        user_prompt = f.read()
     with open(f"{pdf_name}.txt", "r") as f:
         article_text = f.read()
-    
+    user_prompt = USER_PROMPT
     user_prompt = user_prompt.replace("{article_text}", article_text)
     user_prompt = user_prompt.replace("{article_name}", article_name)
     # print(user_prompt)
