@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ article.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ article.title }}</h1>
+        <h2>{{ article.author_name }}</h2>
+        
+        <div class="expander">
+            <h3 onclick="toggleVisibility('section1')">Section 1: Paper Summary</h3>
+            <div id="section1" class="content-box" style="display:none;">
+                <p><strong>Summary:</strong> {{ article.summary }}</p>
+                <p><strong>Snippet:</strong> {{ article.snippet }}</p>
+                <p><strong>Summarized Summary:</strong> {{ article.summarized_summary }}</p>
+                <p><strong>Logical chain:</strong> {{ article.logical_chain }}</p>
+                <div class="expander">
+                    <h4 onclick="toggleVisibility('Abstract')">Abstract</h4>
+                    <div id="Abstract" class="content-box" style="display:none;">
+                        <p><strong>Abstract:</strong> {{ article.Abstract }}</p>
+                    </div>
+                </div>
+                <p><strong>PDF Link:</strong> <a href="{{ article.pdf_link }}">{{ article.pdf_link }}</a></p>
+            </div>
+        </div>
+
+        <div class="expander">
+            <h3 onclick="toggleVisibility('section2')">Section 2: Related Info</h3>
+            <div id="section2" class="content-box-grey" style="display:none;">
+                <div class="expander">
+                    <h4 onclick="toggleVisibility('author_info')">Author Name</h4>
+                    <div id="author_info" class="content-box" style="display:none;">
+                        <p><strong>Name:</strong> {{ article.author_info.name }}</p>
+                        <p><strong>Affiliation:</strong> {{ article.author_info.affiliation }}</p>
+                        <p><strong>Google Scholar Profile:</strong> <a href="{{ article.author_info.google_scholar_profile }}">{{ article.author_info.google_scholar_profile }}</a></p>
+                        <p><strong>Search Link:</strong> <a href="{{ article.author_info.search_link }}">{{ article.author_info.search_link }}</a></p>
+                        <div class="expander">
+                            <h5 onclick="toggleVisibility('total_score')">Total Score, Total Citations Score</h5>
+                            <div id="total_score" class="content-box" style="display:none;">
+                                <p><strong>H-index:</strong> {{ article.author_info.h_index }}</p>
+                                <p><strong>I10-index:</strong> {{ article.author_info.i10_index }}</p>
+                                <p><strong>Cited by:</strong> {{ article.author_info.cited_by }}</p>
+                                <p><strong>H-index Score:</strong> {{ article.author_info.h_index_score }}</p>
+                                <p><strong>i10-index Score:</strong> {{ article.author_info.i10_index_score }}</p>
+                            </div>
+                        </div>
+                        <div class="expander">
+                            <h5 onclick="toggleVisibility('top3_publications')">Top 3 Publications</h5>
+                            <div id="top3_publications" class="content-box" style="display:none;">
+                                {% for pub in article.author_info.top3_publications %}
+                                    <p><strong>Publication Title:</strong> {{ pub.title }}</p>
+                                    <p><strong>Cited by:</strong> {{ pub.cited_by }}</p>
+                                    <p><strong>Link:</strong> <a href="{{ pub.link }}">{{ pub.link }}</a></p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="expander">
+                    <h4 onclick="toggleVisibility('journal_info')">Journal/Conference Info</h4>
+                    <div id="journal_info" class="content-box" style="display:none;">
+                        <p><strong>Journal:</strong> {{ article.journal }}</p>
+                        <p><strong>Published:</strong> {{ article.published }}</p>
+                        <p><strong>Updated:</strong> {{ article.updated }}</p>
+                        <p><strong>Cited By:</strong> {{ article.cited_by }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
