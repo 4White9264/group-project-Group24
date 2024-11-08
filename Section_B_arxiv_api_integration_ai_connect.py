@@ -24,7 +24,7 @@ def answer(article_summary, translation = "English"):
     )
 
     # 打印响应的 JSON 数据以进行调试
-    print("Response JSON:", response.json())
+    # print("Response JSON:", response.json())
 
     # 检查响应状态码
     if response.status_code != 200:
