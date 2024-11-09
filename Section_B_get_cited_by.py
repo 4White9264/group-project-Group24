@@ -1,7 +1,6 @@
 from serpapi import GoogleSearch
 # 从settings.py中导入全局变量
 from Section_B_settings import serpapi_key, engine
-import json
 import requests
 
 def get_cited_by(article_title):

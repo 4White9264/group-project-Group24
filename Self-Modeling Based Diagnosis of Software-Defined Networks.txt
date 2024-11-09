@@ -22,7 +22,6 @@ VNFs at runtime, as these dependencies may vary over time and depend on the serv
  The second challenge is how to model at runtime the 
 dependencies of the underlying network topology, when it is considered dynamic (Fig. 1 (b)). The network topology is dynamic due to several reasons like the connections and disconnections of users to the Access Points (AP), handovers, and especially VNF migrations and the orchestration of new services.  
  The third challenge is how to model the two types of control 
-in SDN, out-of-band and in-band. In out-of-band control, 
 the controller is directly connected to every switch by a dedicated control link, but in in-band control, the controller is only directly connected to the master switch, becoming this one an intermediate node that connects the controller with the rest of switches (slaves). 
 Fig. 1. SDN-NFV scenario: (a) end-to-end service, and (b) network  topology 
 As it will be explained in section III, the most popular approach for diagnosis is the model-based diagnosis. Our approach targets to answer the challenges of diagnosis in the context of SDN and NFV and tracks the dynamic network topology. For this, we propose 1) a model that is suitable to handle the specific elements to monitor within a combined SDN and NFV scenario, and 2) a self-modeling algorithm to enable the automation of the diagnosis model.  
@@ -68,7 +67,6 @@ two dependency graphs of the nodes GNn to be connected (these nodes are given in
 the link GLn to the two dependency graph of nodes GNn.  
 EINTER depicts the dependencies between GLn and GNn.  In Fig. 3(a), the dependency graph of one node GNn has two incoming EINTER edges from the dependency graphs of links GLi and GLj. In Fig. 3(b), the dependency graph of one link GLn has two outgoing edges EINTER towards the dependency nodes of GNi and GNj.  Algorithm: Edge addition IN: Link Descriptor, Global Dependency Graph G(VSORTED,EINSIDE) OUT: Global Dependency Graph G(VSORTED,EINSIDE,EINTER) for each link in Link Descriptor    extract end points attached to link    for each end point in link      EINTERadd edge from GLn[link,link] to GNn[node,card]    end for  end for 
 V. VALIDATION OF DIAGNOSIS MODULE 
-We test our self-modeling based diagnosis in a centralized SDN architecture based on a Floodlight controller. This module runs over the controller for two reasons: (1) to have a global view of the network, and (2) to keep the diagnosis framework independent from any specific southbound protocol. The network topology is obtained via the northbound interface (REST API) trough passive monitoring, to avoid introducing traffic overhead like ping tool. We use Mininet to simulate the SDN network.  First, we prove that our self-modeling algorithm can interpret both the topology and the control type of SDN (out-of-band 
 and in-band). Next, we study the scalability of this algorithm and finally we validate the diagnosis results and their variation under changing network conditions. 
 A. Self-modeling Validation We test the model generation of a linear topology with two switches and a controller with two hosts connected under out-of-band (Fig. 5 (a)) and in-band control (Fig. 5 (b)).  
 Fig. 5. Dependency graphs of linear topology in: (a) out-of-band control, (b) 
@@ -123,4 +121,3 @@ services via inference of multi-level dependencies,” in SIGCOMM, 2007.
 [13] I. Ben-Gal, "Bayesian Networks". Encyclopedia of Statistics in Quality 
 and Reliability. John Wiley & Sons, 2007. 
 [14] TMF Information Framework. Available at: 
-http://www.tmforum.org/zoom/16335/home.html
