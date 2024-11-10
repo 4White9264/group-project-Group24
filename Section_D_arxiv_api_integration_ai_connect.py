@@ -1,10 +1,10 @@
 import requests
 import json
-import toml
+import toml # type: ignore
 import os
 
 # Load API key from secrets.toml
-file_path = 'credentials.txt'
+file_path = 'Section_D_credentials_YQL.txt'
 if os.path.exists(file_path):
     with open(file_path, 'r') as f:
         secrets = toml.load(f)
@@ -30,7 +30,7 @@ def answer(article_summary, translation = "English"):
         headers={"Authorization": f"Bearer {OPENROUTER_API_KEY}"},
         data=json.dumps({ 
             "messages": messages,
-            "model": "openai/gpt-4o-mini-2024-07-18"
+            "model": "openai/chatgpt-4o-latest"
         })
     )
 

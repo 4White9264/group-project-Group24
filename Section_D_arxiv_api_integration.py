@@ -5,13 +5,17 @@ import urllib.parse
 import xml.etree.ElementTree as ET
 from Section_D_arxiv_api_integration_ai_connect import answer
 
+
 def pdf_download(pdf_link, article_title):
     # 根据返回的PDF下载连接，下载 PDF 文件
     pdf_filename = article_title + ".pdf"
     urllib.request.urlretrieve(pdf_link, pdf_filename)
+    
+    
 
 def arxiv_api_calling(article_title, translation):
     # 定义参数
+
     method_name = "query"
     start = 0
     max_results = 29
@@ -26,6 +30,8 @@ def arxiv_api_calling(article_title, translation):
     response = urllib.request.urlopen(url)
     data = response.read().decode('utf-8')
 
+    # print(data)
+
     # 解析 XML 数据
     root = ET.fromstring(data)
 
@@ -39,14 +45,23 @@ def arxiv_api_calling(article_title, translation):
         
 
         if entry.find('{http://www.w3.org/2005/Atom}title').text == article_title:
-            article['id'] = entry.find('{http://www.w3.org/2005/Atom}id').text if entry.find('{http://www.w3.org/2005/Atom}id') is not None else 'No ID available'
-            article['updated'] = entry.find('{http://www.w3.org/2005/Atom}updated').text[:10] if entry.find('{http://www.w3.org/2005/Atom}updated') is not None else 'No update date available'
-            article['published'] = entry.find('{http://www.w3.org/2005/Atom}published').text[:10] if entry.find('{http://www.w3.org/2005/Atom}published') is not None else 'No publish date available'
-            article['title'] = entry.find('{http://www.w3.org/2005/Atom}title').text if entry.find('{http://www.w3.org/2005/Atom}title') is not None else 'No title available'
-            article['summary'] = entry.find('{http://www.w3.org/2005/Atom}summary').text if entry.find('{http://www.w3.org/2005/Atom}summary') is not None else 'No summary available'
+
+            # # Print the XML data，调试
+            # print(ET.tostring(entry, encoding='utf-8').decode('utf-8'))
+
+            article['id'] = entry.find('{http://www.w3.org/2005/Atom}id').text
+
+            updated = entry.find('{http://www.w3.org/2005/Atom}updated').text
+            article['updated'] = updated[:10] # 只保留日期部分
+
+            published = entry.find('{http://www.w3.org/2005/Atom}published').text
+            article['published'] = published[:10] 
+
+            article['title'] = entry.find('{http://www.w3.org/2005/Atom}title').text
+            article['summary'] = entry.find('{http://www.w3.org/2005/Atom}summary').text
             
             authors = entry.findall('{http://www.w3.org/2005/Atom}author')
-            article['authors'] = [author.find('{http://www.w3.org/2005/Atom}name').text for author in authors] if authors else ['No authors available']
+            article['authors'] = [author.find('{http://www.w3.org/2005/Atom}name').text for author in authors]
             
             pdf_link = entry.find('{http://www.w3.org/2005/Atom}link[@title="pdf"]')
             if pdf_link is not None:
@@ -55,16 +70,13 @@ def arxiv_api_calling(article_title, translation):
     # summarized_article = answer(article['summary'], translation)
     # article['summarized summary'] = summarized_article
 
-    if 'summary' in article:
-        summarized_article = answer(article['summary'], translation)
-        article['summarized summary'] = summarized_article
+    # 调用函数，下载 PDF 文件
+    try:
+        pdf_download(article.get('pdf_link'),article['title'])
+        print(f"PDF downloaded successfully as {article['title']}.pdf .")
+    except Exception as e:
+        raise Exception(f"Download Fail: {e}")
 
-        # 调用函数，下载 PDF 文件
-        try:
-            pdf_download(article['pdf_link'], article['title'])
-            print(f"PDF downloaded successfully as {article['title']}.pdf .")
-        except Exception as e:
-            raise Exception(f"Download Fail: {e}")
 
     return article
 
