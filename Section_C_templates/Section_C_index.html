@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArXiv Article Fetcher</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>ArXiv Article Fetcher</h1>
+        <form action="/fetch_article" method="post">
+            <label for="title">Enter the title of the article:</label>
+            <input type="text" id="title" name="title" required>
+            <button type="submit">Fetch Article Details</button>
+        </form>
+    </div>
+</body>
+</html>
