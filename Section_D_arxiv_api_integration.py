@@ -64,6 +64,8 @@ def arxiv_api_calling(article_title, translation):
             article['authors'] = [author.find('{http://www.w3.org/2005/Atom}name').text for author in authors]
             
             pdf_link = entry.find('{http://www.w3.org/2005/Atom}link[@title="pdf"]')
+
+            # print(pdf_link)
             if pdf_link is not None:
                 article['pdf_link'] = pdf_link.attrib['href']
             
@@ -71,11 +73,11 @@ def arxiv_api_calling(article_title, translation):
     # article['summarized summary'] = summarized_article
 
     # 调用函数，下载 PDF 文件
-    try:
-        pdf_download(article.get('pdf_link'),article['title'])
-        print(f"PDF downloaded successfully as {article['title']}.pdf .")
-    except Exception as e:
-        raise Exception(f"Download Fail: {e}")
+    # try:
+    #     pdf_download(article.get('pdf_link'),article['title'])
+    #     print(f"PDF downloaded successfully as {article['title']}.pdf .")
+    # except Exception as e:
+    #     raise Exception(f"Download Fail: {e}")
 
 
     return article
@@ -84,6 +86,7 @@ def arxiv_api_calling(article_title, translation):
 
 
 # # 调用函数
-# article_title = "Noncommutative Poisson structure and invariants of matrices"
+# article_title = "Derived Poisson structures on almost commutative algebras and applications"
 # translation = "English"
-# article = arxiv_api_calling(article_title, translation)
+# article = arxiv_api_calling(article_title, translation).get('pdf_link')
+# print(article)

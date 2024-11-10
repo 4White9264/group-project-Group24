@@ -25,12 +25,11 @@
             <!-- 内容部分，初始状态为隐藏 -->
             <div id="section1" class="content-box" style="display:none;">
                 <!-- 使用 Jinja2 语法插入文章的摘要 -->
+                <p><strong>Publish Date:</strong> {{ article.published }}</p>
+
                 <p><strong>Summary:</strong> {{ article.summary }}</p>
                 <!-- 使用 Jinja2 语法插入文章的片段 -->
-                <p><strong>Snippet:</strong> {{ article.snippet }}</p>
-                <!-- 使用 Jinja2 语法插入文章的总结摘要 -->
-                <p><strong>Summarized Summary:</strong> {{ article.summarized_summary }}</p>
-                <!-- 使用 Jinja2 语法插入文章的逻辑链 -->
+
                 <p><strong>Logical chain:</strong> {{ article.logical_chain }}</p>
                 <!-- 内部可展开的内容部分 -->
                 <div class="expander">
@@ -42,6 +41,22 @@
                         <p><strong>Abstract:</strong> {{ article.Abstract }}</p>
                     </div>
                 </div>
+
+                <div class="expander">
+                    <!-- 标题，带有 onclick 事件处理器，用于切换内容的可见性 -->
+                    <h4 onclick="toggleVisibility('AI Review')">AI Review</h4>
+                    <!-- 内容部分，初始状态为隐藏 -->
+                    <div id="AI Review" class="content-box" style="display:none;">
+                        <!-- 使用 Jinja2 语法插入AI 评论 -->
+                        <p> <strong>AI Comments</strong>{{ article.evaluation_from_ai}}</p>
+                        <p><strong>AI Suggest Substitute:</strong></p>
+                        <p>{{ article.substitute_paper1_names }}</p>
+                        <p>{{ article.substitute_paper2_names }}</p>
+                        <p>{{ article.substitute_paper3_names }}</p>
+                    </div>
+                </div>
+
+
                 <!-- 使用 Jinja2 语法插入 PDF 链接 -->
                 <p><strong>PDF Link:</strong> <a href="{{ article.pdf_link }}">{{ article.pdf_link }}</a></p>
             </div>
@@ -50,17 +65,27 @@
         <!-- 可展开的内容部分 -->
         <div class="expander">
             <!-- 标题，带有 onclick 事件处理器，用于切换内容的可见性 -->
-            <h3 onclick="toggleVisibility('section2')">Section 2: Related Info</h3>
+            <h3 onclick="toggleVisibility('section2')">Section 2: Paper Related Info</h3>
             <!-- 内容部分，初始状态为隐藏 -->
             <div id="section2" class="content-box-grey" style="display:none;">
                 <!-- 内部可展开的内容部分 -->
                 <div class="expander">
                     <!-- 标题，带有 onclick 事件处理器，用于切换内容的可见性 -->
-                    <h4 onclick="toggleVisibility('author_info')">Author Name</h4>
+                    <h4 onclick="toggleVisibility('author_info')">First Author Info</h4>
                     <!-- 内容部分，初始状态为隐藏 -->
                     <div id="author_info" class="content-box" style="display:none;">
                         <!-- 使用 Jinja2 语法插入作者信息 -->
-                        <p><strong>Author Info:</strong> {{ article.author_info }}</p>
+                        <p><strong>Name:</strong> {{ article.first_author_info_name }}</p>
+                        <p><strong>Affiliation:</strong> {{ article.first_author_info_affiliation }}</p>
+                        <p><strong>Google Scholar Id:</strong> {{ article.first_author_info_scholar_id }}</p>
+                        <p><strong>Amount of Citation:</strong> {{ article.first_author_info_citation }}</p>
+                        <p><strong>H-index:</strong> {{ article.first_author_info_hindex }}</p>
+                        <p><strong>H-index 5 Years:</strong> {{ article.first_author_info_hindex5y }}</p>
+                        <p><strong>i10-Index:</strong> {{ article.first_author_info_i10index }}</p>
+                        <p><strong>i10-Index 5 Years:</strong> {{ article.first_author_info_i10index5y }}</p>
+                        <p><strong>Latest Publications (Title/Year):</strong> {{ article.first_author_info_latest_three1 }}</p>
+                        <p> {{ article.first_author_info_latest_three2 }}</p>
+                        <p> {{ article.first_author_info_latest_three3 }}</p>
                     </div>
                 </div>
             </div>

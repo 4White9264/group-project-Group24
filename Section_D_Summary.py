@@ -1,6 +1,7 @@
 from Section_D_arxiv_api_integration import arxiv_api_calling
 from Section_D_GoogleScholar_spider import GoogleScholar_Author
 from Section_D_arxiv_api_integration_ai_connect import answer
+from Section_D_arxiv_api_integration_subpaper import answer_sub
 import time
 
 
@@ -58,8 +59,18 @@ def summary(article_title):
     )
 
 
-    ai_answer = answer(output, translation)
+    # ai_answer = answer(output, translation)
     # 打印输出字符串
+
+    ai_substitute_paper = answer_sub(output, translation)
+
+    print(ai_substitute_paper)
+
+    sep_ai_substitute_paper = ai_substitute_paper.split('\n')
+    paper1, paper2, paper3 = sep_ai_substitute_paper
+
+
+
 
     output_update = {
         "ID": article['id'],
@@ -70,7 +81,8 @@ def summary(article_title):
         "Authors": article['authors'],
         "First Author Info": first_author_info,
         "PDF Link": article.get('pdf_link', 'N/A'),
-        "Evaluation from AI": ai_answer
+        # "Evaluation from AI": ai_answer,
+        "Substitute paper names": [paper1, paper2, paper3]
     }
 
 

@@ -85,11 +85,11 @@ Section_D_output = {
         ]
     },
     "PDF Link": "http://arxiv.org/pdf/2402.06909v2",
-    "Evaluation from AI": """### This paper offers valuable insights into advanced mathematical structures, particularly for readers interested in Poisson geometry and matrix invariants, yet it may be overly specialized for those outside of this field without prior knowledge. The paper solves a notable unresolved problem related to 4x4 matrices' algebra of invariants, which could be extremely useful for experts working in areas like mathematical physics or algebraic geometry. If you're exploring matrix spaces, Poisson geometry, or related mathematical frameworks, this paper is worth a deep dive.
+    "Evaluation from AI": """### This paper offers valuable insights into advanced mathematical structures, particularly for readers interested in Poisson geometry and matrix invariants, 
+    yet it may be overly specialized for those outside of this field without prior knowledge. The paper solves a notable unresolved problem related to 4x4 matrices' algebra of invariants, 
+    which could be extremely useful for experts working in areas like mathematical physics or algebraic geometry. If you're exploring matrix spaces, 
+    Poisson geometry, or related mathematical frameworks, this paper is worth a deep dive. """,
+    "Substitute paper names": ['- Poisson Geometry and Classical and Quantum Integrable Systems', '- Noncommutative Geometry and Matrix Models', '- Calogero-Moser Systems and Representation Theory of Algebras']
 
-    Substitute papers:
-    - "Poisson Geometry and Moment Maps" 
-    - "The Algebra of Invariants of Two Matrices"
-    - "Calogero-Moser Systems and Noncommutative Geometry Analysis" """
 
 }
