@@ -1,10 +1,10 @@
 import requests
 import json
-import toml
+import toml # type: ignore
 import os
 
 # Load API key from secrets.toml
-file_path = 'credentials.txt'
+file_path = 'Section_D_credentials_YQL.txt'
 if os.path.exists(file_path):
     with open(file_path, 'r') as f:
         secrets = toml.load(f)
@@ -15,7 +15,8 @@ def answer(article_summary, translation = "English"):
 
     # 构建对比 prompt
     system_prompt = f"""
-    You are an academic assistant, please help me to analyse some articles in {translation}.
+    This is a info of a academic paper, please tell us whether it is worth to read in deatil base on the criteria.
+    If you think it is worth to read, please provide a substitute paper name. 
     """
 
     # 构建消息
@@ -29,7 +30,7 @@ def answer(article_summary, translation = "English"):
         headers={"Authorization": f"Bearer {OPENROUTER_API_KEY}"},
         data=json.dumps({ 
             "messages": messages,
-            "model": "openai/gpt-4o-mini-2024-07-18"
+            "model": "openai/chatgpt-4o-latest"
         })
     )
 
