@@ -27,9 +27,15 @@ def arxiv_api_calling(article_title, translation):
     # 解析 XML 数据
     root = ET.fromstring(data)
 
+    # print(root)
+
     # 提取文章信息
     article = {}
     for entry in root.findall('{http://www.w3.org/2005/Atom}entry'):
+        # print(ET.tostring(entry, encoding='utf-8').decode('utf-8'))
+
+        
+
         if entry.find('{http://www.w3.org/2005/Atom}title').text == article_title:
             article['id'] = entry.find('{http://www.w3.org/2005/Atom}id').text if entry.find('{http://www.w3.org/2005/Atom}id') is not None else 'No ID available'
             article['updated'] = entry.find('{http://www.w3.org/2005/Atom}updated').text[:10] if entry.find('{http://www.w3.org/2005/Atom}updated') is not None else 'No update date available'
@@ -41,7 +47,11 @@ def arxiv_api_calling(article_title, translation):
             article['authors'] = [author.find('{http://www.w3.org/2005/Atom}name').text for author in authors] if authors else ['No authors available']
             
             pdf_link = entry.find('{http://www.w3.org/2005/Atom}link[@title="pdf"]')
-            article['pdf_link'] = pdf_link.attrib['href'] if pdf_link is not None else 'N/A'
+            if pdf_link is not None:
+                article['pdf_link'] = pdf_link.attrib['href']
+            
+    # summarized_article = answer(article['summary'], translation)
+    # article['summarized summary'] = summarized_article
 
     if 'summary' in article:
         summarized_article = answer(article['summary'], translation)
@@ -55,3 +65,11 @@ def arxiv_api_calling(article_title, translation):
             raise Exception(f"Download Fail: {e}")
 
     return article
+
+
+
+
+# # 调用函数
+# article_title = "Noncommutative Poisson structure and invariants of matrices"
+# translation = "English"
+# article = arxiv_api_calling(article_title, translation)
