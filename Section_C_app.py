@@ -28,41 +28,47 @@ def get_article_details(title):
     }
     return article
 
+# 定义函数，用于创建 Excel 文件
 def create_excel_file(article):
-    df = pd.DataFrame([article])
-    df = df.transpose()
-    df.reset_index(inplace=True)
-    df.columns = ['Heading', 'Details']
-    output = BytesIO()
-    with pd.ExcelWriter(output, engine='xlsxwriter') as writer:
-        df.to_excel(writer, index=False, sheet_name='Article Details')
-        writer.close()
-    output.seek(0)
-    return output
+    df = pd.DataFrame([article])  # 将文章字典转换为 DataFrame
+    df = df.transpose()  # 转置 DataFrame
+    df.reset_index(inplace=True)  # 重置索引
+    df.columns = ['Heading', 'Details']  # 设置列名
+    output = BytesIO()  # 创建一个 BytesIO 对象，用于保存 Excel 文件
+    with pd.ExcelWriter(output, engine='xlsxwriter') as writer:  # 使用 xlsxwriter 引擎创建 Excel 文件
+        df.to_excel(writer, index=False, sheet_name='Article Details')  # 将 DataFrame 写入 Excel 文件
+        writer.close()  # 关闭写入器
+    output.seek(0)  # 将文件指针移动到文件开头
+    return output  # 返回 BytesIO 对象
 
+# 定义路由，处理根路径请求
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html')  # 渲染 index.html 模板
 
+# 定义路由，处理 /fetch_article 路径的 POST 请求
 @app.route('/fetch_article', methods=['POST'])
 def fetch_article():
-    title = request.form['title']
-    article = get_article_details(title)
-    return render_template('article_details.html', article=article)
+    title = request.form['title']  # 获取表单中的文章标题
+    article = get_article_details(title)  # 获取文章详情
+    return render_template('article_details.html', article=article)  # 渲染 article_details.html 模板，并传递文章详情
 
+# 定义路由，处理 /download_excel 路径的 GET 请求
 @app.route('/download_excel')
 def download_excel():
-    title = request.args.get('title')
-    article = get_article_details(title)
-    excel_file = create_excel_file(article)
-    return send_file(excel_file, as_attachment=True, download_name="article_details.xlsx", mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    title = request.args.get('title')  # 获取请求参数中的文章标题
+    article = get_article_details(title)  # 获取文章详情
+    excel_file = create_excel_file(article)  # 创建 Excel 文件
+    return send_file(excel_file, as_attachment=True, download_name="article_details.xlsx", mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')  # 发送 Excel 文件给客户端
 
+# 定义路由，处理 /download_pdf 路径的 GET 请求
 @app.route('/download_pdf')
 def download_pdf():
-    title = request.args.get('title')
-    article = get_article_details(title)
-    pdf_link = article['pdf_link']
-    return send_file(pdf_link, as_attachment=True, download_name="article.pdf", mimetype='application/pdf')
+    title = request.args.get('title')  # 获取请求参数中的文章标题
+    article = get_article_details(title)  # 获取文章详情
+    pdf_link = article['pdf_link']  # 获取 PDF 链接
+    return send_file(pdf_link, as_attachment=True, download_name="article.pdf", mimetype='application/pdf')  # 发送 PDF 文件给客户端
 
+# 启动 Flask 应用
 if __name__ == '__main__':
-    app.run(debug=True, port=5017)
+    app.run(debug=True, port=5017)  # 启动 Flask 应用，启用调试模式，设置端口为 5017
