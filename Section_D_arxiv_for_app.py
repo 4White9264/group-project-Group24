@@ -1,7 +1,7 @@
 import urllib.request
 import urllib.parse
 import xml.etree.ElementTree as ET
-from arxiv_api_integration_ai_connect import answer
+from Section_D_arxiv_api_integration_ai_connect import answer
 
 def pdf_download(pdf_link, article_title):
     # 根据返回的PDF下载连接，下载 PDF 文件
