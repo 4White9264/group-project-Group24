@@ -61,17 +61,17 @@ def summary(article_title):
     ai_answer = answer(output, translation)
     # 打印输出字符串
 
-    output_update = (
-        f"ID: {article['id']}\n"
-        f"Published: {article['published']}\n"
-        f"Updated: {article['updated']}\n"
-        f"Title: {article['title']}\n"
-        f"Summary: {article['summary']}\n"
-        f"Authors: {article['authors']}\n"
-        f"First Author Info: {first_author_info}\n"
-        f"PDF Link: {article.get('pdf_link', 'N/A')}\n"
-        f"Evaluation from AI: {ai_answer}\n"
-    )
+    output_update = {
+        "ID": article['id'],
+        "Published": article['published'],
+        "Updated": article['updated'],
+        "Title": article['title'],
+        "Summary": article['summary'],
+        "Authors": article['authors'],
+        "First Author Info": first_author_info,
+        "PDF Link": article.get('pdf_link', 'N/A'),
+        "Evaluation from AI": ai_answer
+    }
 
 
 
