@@ -16,7 +16,8 @@ def answer_sub(article_summary, translation = "English"):
     # 构建对比 prompt
     system_prompt = f"""
     This is an academic paper; I need you to find three papers from arxiv that are similar 
-    in content, quality, journal ranking, and author expertise. Please provide their titles, one in each line.
+    in content, quality, journal ranking, and author expertise. 
+    Please provide exactly the title of the papers, one in each line.
 
     The output has to be without any further description, words, symbol, subtitle, bullet point, or numbering.
     """

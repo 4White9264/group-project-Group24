@@ -9,7 +9,7 @@ Section_A_output = {
     "summary": "F Eshmatov, X García-Martínez, R Turdibaev - arXiv preprint arXiv …, 2024 - arxiv.org",
     "authors": ["F Eshmatov", "X García-Martínez", "R Turdibaev"],
     "journal": "arXiv preprint arXiv …",
-    "cited_by": "N/A",
+    "cited_by": 21,
     "author_info": {
         "name": "Farkhod Eshmatov",
         "affiliation": "Professor of Mathematics, AKFA University",
@@ -58,8 +58,23 @@ Section_B_output = {
     "related_work": {
         "Self-Modeling Based Diagnosis of Software-Defined Networks": "The related work highlights existing approaches to model-based diagnosis primarily focused on static topologies, discussing their shortcomings in handling dynamically changing environments, especially in the context of SDN and NFV. The paper advances the state of the art by proposing a self-modeling diagnosis that dynamically constructs dependency graphs while considering finer granularities of network components."
     },
-    "logical_chain": "The article presents a comprehensive argumentation process that starts by identifying key challenges in diagnosing software-defined and virtualized network environments, leading to the proposal of a self-modeling framework that systematically constructs detailed dependency graphs necessary for effective diagnosis. The method enhances diagnosis granularity and automation while addressing the limitations of existing models, establishing a well-supported case for improving network resiliency through self-diagnosing capabilities."
+    "logical_chain": "The article presents a comprehensive argumentation process that starts by identifying key challenges in diagnosing software-defined and virtualized network environments, leading to the proposal of a self-modeling framework that systematically constructs detailed dependency graphs necessary for effective diagnosis. The method enhances diagnosis granularity and automation while addressing the limitations of existing models, establishing a well-supported case for improving network resiliency through self-diagnosing capabilities.",
+    "cited_by": {
+        'cited_by_0': {
+            'title': 'Automatic belief network modeling via policy inference for SDN fault localization', 
+            'snippet': 'Fault localization for SDN becomes one of the most critical but difficult tasks. Existing tools typically only address a specific part of the problem (eg, control plane verification, flow …'
+        }, 
+        'cited_by_1': {
+            'title': 'A survey of fault management in network virtualization environments: Challenges and solutions', 
+            'snippet': 'The advent of 5G and the ever increasing stringent requirements in terms of bandwidth, latency, and quality of service pushes the boundaries of what is feasible with legacy Mobile …'
+        }, 
+        'cited_by_2': {
+            'title': 'Self-healing topology discovery protocol for software-defined networks', 
+            'snippet': 'This letter presents the design of a self-healing protocol for automatic discovery and maintenance of the network topology in software-defined networks. The proposed protocol …'
+        }
+    }
 }
+
 
 
 Section_D_output = {
@@ -93,3 +108,9 @@ Section_D_output = {
 
 
 }
+
+for key in Section_D_output.keys():
+    print(key)
+
+for key in Section_B_output.keys():
+    print(key)

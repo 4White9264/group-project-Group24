@@ -59,7 +59,7 @@ def summary(article_title):
     )
 
 
-    # ai_answer = answer(output, translation)
+    ai_answer = answer(output, translation)
     # 打印输出字符串
 
     ai_substitute_paper = answer_sub(output, translation)
@@ -81,7 +81,7 @@ def summary(article_title):
         "Authors": article['authors'],
         "First Author Info": first_author_info,
         "PDF Link": article.get('pdf_link', 'N/A'),
-        # "Evaluation from AI": ai_answer,
+        "Evaluation from AI": ai_answer,
         "Substitute paper names": [paper1, paper2, paper3]
     }
 
