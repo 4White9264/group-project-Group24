@@ -7,3 +7,12 @@
 3. 再把确认的结果放到 Section_C_app.py中,先不要运行
 4. 然后去 templeates 文件夹里面的 article_details.html 修改网站的格式,有注释,大概结合网站看看能理解,不懂找Copoilot
 5. 运行Section_C_app.py,打开网站
+
+11/11/2024 下午修改Section_B部分-zzh：
+1. Section_B_get_cited_by.py: 加入判断，避免因为文章未被引用过而系统终止；
+2. Section_C_app、html文件相关部分：按需求改了；
+3. 出于把所有输出整合到一起的需求，新增一个Section_B_get_output.py文件来完成这个工作。引用方法：
+```python
+from Section_B_get_output import get_Section_B_output
+output = get_Section_B_output(pdf_name, article_name, translation)
+```

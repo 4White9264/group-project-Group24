@@ -13,8 +13,16 @@ def get_cited_by(article_title):
    
     search = GoogleSearch(params)
     results = search.get_dict()
-    cited_by_url = results['organic_results'][0]["inline_links"]["cited_by"]["serpapi_scholar_link"]
 
+    if 'organic_results' not in results or \
+       len(results['organic_results']) <= 0 or \
+       'inline_links' not in results['organic_results'][0] or \
+       'cited_by' not in results['organic_results'][0]['inline_links']:
+        # 如果相关信息不存在
+        output_dict = {"Error": "No cited by articles found."}
+        return output_dict
+
+    cited_by_url = results['organic_results'][0]["inline_links"]["cited_by"]["serpapi_scholar_link"]
     #print(cited_by_url)
 
     response = requests.get(cited_by_url,  params={"api_key": serpapi_key})

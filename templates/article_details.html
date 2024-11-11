@@ -68,6 +68,7 @@
             <h3 onclick="toggleVisibility('section2')">Section 2: Paper Related Info</h3>
             <!-- 内容部分，初始状态为隐藏 -->
             <div id="section2" class="content-box-grey" style="display:none;">
+
                 <!-- 内部可展开的内容部分 -->
                 <div class="expander">
                     <!-- 标题，带有 onclick 事件处理器，用于切换内容的可见性 -->
@@ -86,6 +87,51 @@
                         <p><strong>Latest Publications (Title/Year):</strong> {{ article.first_author_info_latest_three1 }}</p>
                         <p> {{ article.first_author_info_latest_three2 }}</p>
                         <p> {{ article.first_author_info_latest_three3 }}</p>
+                    </div>
+                </div>
+
+                <div class="expander">
+                    <!-- 标题，带有 onclick 事件处理器，用于切换内容的可见性 -->
+                    <h4 onclick="toggleVisibility('cited_by_info')">Articles which cited this one</h4>
+                    <!-- 内容部分，初始状态为隐藏 -->
+                    <div id="cited_by_info" class="content-box" style="display:none;">
+                        <!-- 使用 Jinja2 语法插入信息 -->
+                        <p><strong>Cited by Total:</strong> {{ article.cited_by }}</p>
+                        <!-- 内部可展开的内容部分 -->
+                        <div class="expander">
+                            <!-- 标题，带有 onclick 事件处理器，用于切换内容的可见性 -->
+                            <h4 onclick="toggleVisibility('Article 1')"> Article 1 </h4>
+                            <!-- 内容部分，初始状态为隐藏 -->
+                            <div id="Article 1" class="content-box" style="display:none;">
+                                <!-- 使用 Jinja2 语法插入文章的摘要 -->
+                                <p><strong>title:</strong> {{ article.cited_by_articles.cited_by_0.title }}</p>
+                                <p><strong>snippet:</strong>{{ article.cited_by_articles.cited_by_0.snippet }}</p>
+                            </div>
+                        </div>
+
+                        <!-- 内部可展开的内容部分 -->
+                        <div class="expander">
+                            <!-- 标题，带有 onclick 事件处理器，用于切换内容的可见性 -->
+                            <h4 onclick="toggleVisibility('Article 2')"> Article 2 </h4>
+                            <!-- 内容部分，初始状态为隐藏 -->
+                            <div id="Article 2" class="content-box" style="display:none;">
+                                <!-- 使用 Jinja2 语法插入文章的摘要 -->
+                                <p><strong>title:</strong> {{ article.cited_by_articles.cited_by_1.title }}</p>
+                                <p><strong>snippet:</strong>{{ article.cited_by_articles.cited_by_1.snippet }}</p>
+                            </div>
+                        </div>
+
+                        <!-- 内部可展开的内容部分 -->
+                        <div class="expander">
+                            <!-- 标题，带有 onclick 事件处理器，用于切换内容的可见性 -->
+                            <h4 onclick="toggleVisibility('Article 3')"> Article 3 </h4>
+                            <!-- 内容部分，初始状态为隐藏 -->
+                            <div id="Article 3" class="content-box" style="display:none;">
+                                <!-- 使用 Jinja2 语法插入文章的摘要 -->
+                                <p><strong>title:</strong> {{ article.cited_by_articles.cited_by_2.title }}</p>
+                                <p><strong>snippet:</strong>{{ article.cited_by_articles.cited_by_2.snippet }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

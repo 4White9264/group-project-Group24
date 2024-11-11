@@ -48,6 +48,7 @@ def get_article_details(title):
 
         'journal': Section_A_output.get('journal', 'N/A'),  # 从 Section_A_output 获取期刊信息
         'cited_by': Section_A_output.get('cited_by', 'N/A'),  # 从 Section_A_output 获取引用次数
+        'cited_by_articles': Section_B_output.get('cited_by', {}),  # 从 Section_B_output 获取前三篇引用的文章信息
         'related_work': Section_A_output.get('related_work', {}),  # 从 Section_A_output 获取相关工作
         'logical_chain': Section_B_output.get('logical_chain', 'N/A'),  # 从 Section_B_output 获取逻辑链
         'Abstract': Section_B_output.get('summaries', {}).get('Abstract', 'N/A'),  # 从 Section_B_output 获取摘要
