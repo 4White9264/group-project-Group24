@@ -16,3 +16,12 @@
 from Section_B_get_output import get_Section_B_output
 output = get_Section_B_output(pdf_name, article_name, translation)
 ```
+
+11/11/2024 晚上修改:
+1. 接入 Section_D部分真实输出，并调试成功
+
+遗留任务：
+1. 接入 Section_A & Section_B 部分真实输出，并调试成功 - zzh
+2. 检查是否所有的input.py里面的key都在网站里面 - zzh
+
+3. 调整UI格式，没那么丑 - yql&zzh（zzh也需要了解怎么调，给点建议，大家都是直男审美都拉）

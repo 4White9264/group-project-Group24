@@ -2,11 +2,15 @@ from flask import Flask, render_template, request, send_file
 import pandas as pd
 from io import BytesIO
 from Section_C_input import Section_A_output, Section_D_output, Section_B_output
+from Section_D_Summary import summary
 
 app = Flask(__name__)
 
 def get_article_details(title):
     # 为了测试目的，我们直接使用提供的数据
+
+    # # 在你的代码调通直接别解开这个，会耗费我的AI配额，不解开用的就是input.py里的数据
+    # Section_D_output = summary(title)
 
     first_author_info_latest_three_pub = Section_D_output.get('First Author Info', {}).get('latest_three_publications', [])
     formated1 = f"\n{first_author_info_latest_three_pub[0][0]}, {first_author_info_latest_three_pub[0][1]}"
@@ -28,7 +32,8 @@ def get_article_details(title):
         "first_author_info_name":(Section_D_output.get('Authors', []))[0],  # 从 Section_D_output 获取第一作者姓名
         'first_author_info_affiliation': Section_D_output.get('First Author Info', {}).get('affiliation', 'N/A'),  # 从 Section_D_output 获取第一作者机构
         'first_author_info_scholar_id': Section_D_output.get('First Author Info', {}).get('scholar_id', 'N/A'),  # 从 Section_D_output 获取第一作者 Google Scholar ID
-        'first_author_info_citation': Section_D_output.get('First Author Info', {}).get('citedby', 'N/A'),  # 从 Section_D_output 获取第一作者引用次数
+        'first_author_info_citation': Section_D_output.get('First Author Info', {}).get('citation', 'N/A'),  # 从 Section_D_output 获取第一作者引用次数
+        "first_author_info_num_publications": Section_D_output.get('First Author Info', {}).get('num_publications', 'N/A'),  # 从 Section_D_output 获取第一作者发表文章数
         'first_author_info_hindex': Section_D_output.get('First Author Info', {}).get('hindex', 'N/A'),  # 从 Section_D_output 获取第一作者 h-index
         'first_author_info_hindex5y': Section_D_output.get('First Author Info', {}).get('hindex5y', 'N/A'),  # 从 Section_D_output 获取第一作者 5 年 h-index
         'first_author_info_i10index': Section_D_output.get('First Author Info', {}).get('i10index', 'N/A'),  # 从 Section_D_output 获取第一作者 i10-index
@@ -49,7 +54,7 @@ def get_article_details(title):
         'journal': Section_A_output.get('journal', 'N/A'),  # 从 Section_A_output 获取期刊信息
         'cited_by': Section_A_output.get('cited_by', 'N/A'),  # 从 Section_A_output 获取引用次数
         'cited_by_articles': Section_B_output.get('cited_by', {}),  # 从 Section_B_output 获取前三篇引用的文章信息
-        'related_work': Section_A_output.get('related_work', {}),  # 从 Section_A_output 获取相关工作
+        'related_work': Section_B_output.get('related_work', {}),  # 从 Section_A_output 获取相关工作
         'logical_chain': Section_B_output.get('logical_chain', 'N/A'),  # 从 Section_B_output 获取逻辑链
         'Abstract': Section_B_output.get('summaries', {}).get('Abstract', 'N/A'),  # 从 Section_B_output 获取摘要
         'google_scholar_profile': Section_A_output.get('author_info', {}).get('google_scholar_profile', 'N/A'),  # 从 Section_A_output 获取 Google Scholar 个人资料

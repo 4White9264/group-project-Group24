@@ -15,7 +15,11 @@ def answer(article_summary, translation = "English"):
 
     # 构建对比 prompt
     system_prompt = f"""
-    This is a info of a academic paper, please tell us whether it is worth to read in deatil base on the criteria in three sentences with layman-term.
+    This is a info of a academic paper, please tell us whether it is worth to read with academical reasons, in three sentences, with layman-term.
+
+    The first sentence should comments about the quality of the paper, 
+    the second sentence should comments about the content of the paper, 
+    and the third sentence should comments about the author expertise.
 
     """
 
