@@ -73,11 +73,11 @@ def arxiv_api_calling(article_title, translation):
     # article['summarized summary'] = summarized_article
 
     # 调用函数，下载 PDF 文件
-    # try:
-    #     pdf_download(article.get('pdf_link'),article['title'])
-    #     print(f"PDF downloaded successfully as {article['title']}.pdf .")
-    # except Exception as e:
-    #     raise Exception(f"Download Fail: {e}")
+    try:
+        pdf_download(article.get('pdf_link'),article['title'])
+        print(f"PDF downloaded successfully as {article['title']}.pdf .")
+    except Exception as e:
+        raise Exception(f"Download Fail: {e}")
 
 
     return article
