@@ -34,11 +34,13 @@
                 <!-- 内部可展开的内容部分 -->
                 <div class="expander">
                     <!-- 标题，带有 onclick 事件处理器，用于切换内容的可见性 -->
-                    <h4 onclick="toggleVisibility('Abstract')">Abstract</h4>
+                    <h4 onclick="toggleVisibility('Summaries')">Each Chapter's Summary</h4>
                     <!-- 内容部分，初始状态为隐藏 -->
-                    <div id="Abstract" class="content-box" style="display:none;">
-                        <!-- 使用 Jinja2 语法插入文章的摘要 -->
-                        <p><strong>Abstract:</strong> {{ article.Abstract }}</p>
+                    <div id="Summaries" class="content-box" style="display:none;">
+                        <!-- 使用 Jinja2 循环语法插入各个章节的总结 -->
+                        {% for key, value in article.Summaries.items() %}
+                            <p><strong>{{ key }}:</strong> {{ value }}</p>
+                        {% endfor %}
                     </div>
                 </div>
 
@@ -98,41 +100,19 @@
                     <div id="cited_by_info" class="content-box" style="display:none;">
                         <!-- 使用 Jinja2 语法插入信息 -->
                         <p><strong>Cited by Total:</strong> {{ article.cited_by }}</p>
-                        <!-- 内部可展开的内容部分 -->
-                        <div class="expander">
-                            <!-- 标题，带有 onclick 事件处理器，用于切换内容的可见性 -->
-                            <h4 onclick="toggleVisibility('Article 1')"> Article 1 </h4>
-                            <!-- 内容部分，初始状态为隐藏 -->
-                            <div id="Article 1" class="content-box" style="display:none;">
-                                <!-- 使用 Jinja2 语法插入文章的摘要 -->
-                                <p><strong>title:</strong> {{ article.cited_by_articles.cited_by_0.title }}</p>
-                                <p><strong>snippet:</strong>{{ article.cited_by_articles.cited_by_0.snippet }}</p>
-                            </div>
-                        </div>
 
-                        <!-- 内部可展开的内容部分 -->
-                        <div class="expander">
-                            <!-- 标题，带有 onclick 事件处理器，用于切换内容的可见性 -->
-                            <h4 onclick="toggleVisibility('Article 2')"> Article 2 </h4>
-                            <!-- 内容部分，初始状态为隐藏 -->
-                            <div id="Article 2" class="content-box" style="display:none;">
-                                <!-- 使用 Jinja2 语法插入文章的摘要 -->
-                                <p><strong>title:</strong> {{ article.cited_by_articles.cited_by_1.title }}</p>
-                                <p><strong>snippet:</strong>{{ article.cited_by_articles.cited_by_1.snippet }}</p>
+                        {% for key, value in article.cited_by_articles.items() %}
+                            <div class="expander">
+                                <!-- 标题，带有 onclick 事件处理器，用于切换内容的可见性 -->
+                                <h4 onclick="toggleVisibility('Article{{ loop.index }}')"> Article {{ loop.index }} </h4>
+                                <!-- 内容部分，初始状态为隐藏 -->
+                                <div id="Article{{ loop.index }}" class="content-box" style="display:none;">
+                                    <!-- 使用 Jinja2 语法插入文章的摘要 -->
+                                    <p><strong>title:</strong> {{ value.title }}</p>
+                                    <p><strong>snippet:</strong>{{ value.snippet }}</p>
+                                </div>
                             </div>
-                        </div>
-
-                        <!-- 内部可展开的内容部分 -->
-                        <div class="expander">
-                            <!-- 标题，带有 onclick 事件处理器，用于切换内容的可见性 -->
-                            <h4 onclick="toggleVisibility('Article 3')"> Article 3 </h4>
-                            <!-- 内容部分，初始状态为隐藏 -->
-                            <div id="Article 3" class="content-box" style="display:none;">
-                                <!-- 使用 Jinja2 语法插入文章的摘要 -->
-                                <p><strong>title:</strong> {{ article.cited_by_articles.cited_by_2.title }}</p>
-                                <p><strong>snippet:</strong>{{ article.cited_by_articles.cited_by_2.snippet }}</p>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
