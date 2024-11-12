@@ -2,7 +2,9 @@ from flask import Flask, render_template, request, send_file
 import pandas as pd
 from io import BytesIO
 from Section_C_input import Section_A_output, Section_D_output, Section_B_output
+from Section_B_get_output import get_Section_B_output
 from Section_D_Summary import summary
+
 
 app = Flask(__name__)
 
@@ -11,6 +13,7 @@ def get_article_details(title):
 
     # 在你的代码调通直接别解开这个，会耗费我的AI配额，不解开用的就是input.py里的数据
     # Section_D_output = summary(title)
+    # Section_B_output = get_Section_B_output(title, title, "English")
 
     first_author_info_latest_three_pub = Section_D_output.get('First Author Info', {}).get('latest_three_publications', [])
     formated1 = f"\n{first_author_info_latest_three_pub[0][0]}, {first_author_info_latest_three_pub[0][1]}"
@@ -105,6 +108,11 @@ def download_pdf():
     article = get_article_details(title)  # 获取文章详情
     pdf_link = article['pdf_link']  # 获取 PDF 链接
     return send_file(pdf_link, as_attachment=True, download_name="article.pdf", mimetype='application/pdf')  # 发送 PDF 文件给客户端
+
+# 定义路由，处理 404 错误
+@app.route('/<path:path>')
+def catch_all(path):
+    return render_template('404.html')
 
 # 启动 Flask 应用
 if __name__ == '__main__':

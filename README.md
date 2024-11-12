@@ -25,3 +25,9 @@ output = get_Section_B_output(pdf_name, article_name, translation)
 2. 检查是否所有的input.py里面的key都在网站里面 - zzh
 
 3. 调整UI格式，没那么丑 - yql&zzh（zzh也需要了解怎么调，给点建议，大家都是直男审美都拉）
+
+11/13/2024 凌晨：
+1. 接入Section_B真实输出并调试成功
+2. 前端部分新增404页面，用于处理非法路径
+3. 修改index.html，主要是把内容移到侧边栏，并增加了小组成员；引入了背景图片
+4. 修改style.css，增加了侧边栏和背景图片相关类的定义

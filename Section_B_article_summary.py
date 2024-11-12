@@ -25,10 +25,12 @@ def get_context_and_feedback_from_ai(pdf_name, article_name, translation = "Engl
     for key in output_dict['texts'].keys():
         titles.append(key)
     # print(titles)
+    # print("/*---------------------------------------------------------------*/")
     for title in titles:
         article_text = article_text.replace(title, "\n\n\n\n\n")
     article_text_list = article_text.split("\n\n\n\n\n")
     # print(article_text_list)
+    # print("/*---------------------------------------------------------------*/")
     output_dict['texts'] = dict(zip(titles, article_text_list[1:]))
 
     return output_dict

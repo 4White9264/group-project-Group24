@@ -25,7 +25,7 @@ def answer(article_summary, translation = "English"):
 
     # 打印响应的 JSON 数据以进行调试
     # print("Response JSON:", response.json())
-
+    # print("/*---------------------------------------------------------------*/")
     # 检查响应状态码
     if response.status_code != 200:
         raise Exception(f"API 请求失败，状态码: {response.status_code}, 错误信息: {response.json()}")
