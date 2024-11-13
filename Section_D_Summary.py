@@ -67,7 +67,9 @@ def summary(article_title):
     # print(ai_substitute_paper)
 
     sep_ai_substitute_paper = ai_substitute_paper.split('\n')
+    print(sep_ai_substitute_paper)
     paper1, paper2, paper3 = sep_ai_substitute_paper
+    
 
 
 

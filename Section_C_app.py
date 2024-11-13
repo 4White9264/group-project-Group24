@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, send_file
 import pandas as pd
 from io import BytesIO
-from Section_C_input import Section_A_output, Section_D_output, Section_B_output
+# from Section_C_input import Section_A_output, Section_D_output, Section_B_output
 from Section_B_get_output import get_Section_B_output
 from Section_D_Summary import summary
 
@@ -13,7 +13,7 @@ def get_article_details(title):
 
     # 在你的代码调通直接别解开这个，会耗费我的AI配额，不解开用的就是input.py里的数据
     # Section_D_output = summary(title)
-    # Section_B_output = get_Section_B_output(title, title, "English")
+    Section_B_output = get_Section_B_output(title, title, "English")
 
     first_author_info_latest_three_pub = Section_D_output.get('First Author Info', {}).get('latest_three_publications', [])
     formated1 = f"\n{first_author_info_latest_three_pub[0][0]}, {first_author_info_latest_three_pub[0][1]}"
@@ -54,15 +54,15 @@ def get_article_details(title):
         "substitute_paper3_names": Section_D_output.get('Substitute paper names', 'N/A')[2],  # 从 Section_D_output 获取替代论文名称
 
 
-        'journal': Section_A_output.get('journal', 'N/A'),  # 从 Section_A_output 获取期刊信息
-        'cited_by': Section_A_output.get('cited_by', 'N/A'),  # 从 Section_A_output 获取引用次数
+        # 'journal': Section_A_output.get('journal', 'N/A'),  # 从 Section_A_output 获取期刊信息
+        # 'cited_by': Section_A_output.get('cited_by', 'N/A'),  # 从 Section_A_output 获取引用次数
         'cited_by_articles': Section_B_output.get('cited_by', {}),  # 从 Section_B_output 获取前三篇引用的文章信息
         'related_work': Section_B_output.get('related_work', {}),  # 从 Section_A_output 获取相关工作
         'logical_chain': Section_B_output.get('logical_chain', 'N/A'),  # 从 Section_B_output 获取逻辑链
         # 'Abstract': Section_B_output.get('summaries', {}).get('Abstract', 'N/A'),  # 从 Section_B_output 获取摘要
         'Summaries': Section_B_output.get('summaries', {}),  # 从 Section_B_output 获取各章节总结
-        'google_scholar_profile': Section_A_output.get('author_info', {}).get('google_scholar_profile', 'N/A'),  # 从 Section_A_output 获取 Google Scholar 个人资料
-        'search_link': Section_A_output.get('author_info', {}).get('search_link', 'N/A')  # 从 Section_A_output 获取搜索链接
+        # 'google_scholar_profile': Section_A_output.get('author_info', {}).get('google_scholar_profile', 'N/A'),  # 从 Section_A_output 获取 Google Scholar 个人资料
+        # 'search_link': Section_A_output.get('author_info', {}).get('search_link', 'N/A')  # 从 Section_A_output 获取搜索链接
        
     }
 
