@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, send_file
 import pandas as pd
 from io import BytesIO
-# from Section_C_input import Section_A_output, Section_D_output, Section_B_output
+from Section_C_input import Section_A_output, Section_D_output, Section_B_output
 from Section_B_get_output import get_Section_B_output
 from Section_D_Summary import summary
 

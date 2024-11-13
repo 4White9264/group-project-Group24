@@ -42,7 +42,6 @@ executing==2.1.0
 fake-useragent==1.5.1
 fastjsonschema==2.20.0
 filelock==3.13.1
-fitz==0.0.1.dev2
 flash==1.0.3
 Flask==3.0.3
 fonttools==4.54.1
@@ -53,7 +52,7 @@ fsspec==2024.2.0
 gitdb==4.0.11
 GitPython==3.1.43
 google_search_results==2.4.2
-greenlet==3.1.1
+greenlet==3.0.3
 h11==0.14.0
 httpcore==1.0.5
 httplib2==0.22.0
@@ -122,7 +121,7 @@ pathlib==1.0.1
 pexpect==4.9.0
 pillow==10.4.0
 platformdirs==4.3.6
-playwright==1.48.0
+playwright==1.46.0
 plotly==5.24.1
 prometheus_client==0.21.0
 prompt_toolkit==3.0.48
@@ -141,7 +140,7 @@ pycurl==7.45.3
 pydeck==0.9.1
 PyDispatcher==2.0.7
 pydot==3.0.2
-pyee==11.1.1
+pyee==11.1.0
 Pygments==2.18.0
 PyMuPDF==1.24.13
 pyOpenSSL==24.2.1

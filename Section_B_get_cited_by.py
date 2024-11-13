@@ -19,10 +19,14 @@ def get_cited_by(article_title):
        'inline_links' not in results['organic_results'][0] or \
        'cited_by' not in results['organic_results'][0]['inline_links']:
         # 如果相关信息不存在
-        output_dict = {"Error": "No cited by articles found."}
+        output_dict = {
+            "Status": "Error",
+            "Error_info": "Sorry, there is no articles citing this paper in Google Scholar."
+        }
         return output_dict
 
     cited_by_url = results['organic_results'][0]["inline_links"]["cited_by"]["serpapi_scholar_link"]
+    cited_by_num = results['organic_results'][0]["inline_links"]["cited_by"]["total"]
     #print(cited_by_url)
 
     response = requests.get(cited_by_url,  params={"api_key": serpapi_key})
@@ -36,14 +40,18 @@ def get_cited_by(article_title):
         # list↓
         cited_by_articles = cited_by_articles_dict["organic_results"]
         output_dict = {}
+        output_dict["Status"] = "OK"
+        output_dict["cited_by_num"] = cited_by_num
+        output_dict["cited_by_details"] = {}
         for i in range(len(cited_by_articles)):
             cited_by_article_dict = {}
+            # 只需要title, snippet
             cited_by_article_dict["title"] = cited_by_articles[i]["title"]
-            cited_by_article_dict["link"] = cited_by_articles[i]["link"]
+            # cited_by_article_dict["link"] = cited_by_articles[i]["link"]
             cited_by_article_dict["snippet"] = cited_by_articles[i]["snippet"]
-            cited_by_article_dict["authors"] = cited_by_articles[i]["publication_info"]["authors"]
-            cited_by_article_dict["resources"] = cited_by_articles[i]["resources"]
-            output_dict[f"cited_by_{i}"] = cited_by_article_dict
+            # cited_by_article_dict["authors"] = cited_by_articles[i]["publication_info"]["authors"]
+            # cited_by_article_dict["resources"] = cited_by_articles[i]["resources"]
+            output_dict["cited_by_details"][f"cited_by_{i}"] = cited_by_article_dict
 
             if i >= 2:
                 break
@@ -55,6 +63,9 @@ def get_cited_by(article_title):
     
     # 若请求不成功：
     else:
-        output_dict = {"Error": f"Your request is not successful. The status code is {response.status_code}."}
+        output_dict = {
+            "Status": "Error",
+            "Error_info": f"Your request is not successful. The status code is {response.status_code}. Please contact the authors of this web application."
+        }
         return output_dict
     

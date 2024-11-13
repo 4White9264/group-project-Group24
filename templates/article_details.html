@@ -98,21 +98,7 @@
                     <h4 onclick="toggleVisibility('cited_by_info')">Articles which cited this paper</h4>
                     <!-- 内容部分，初始状态为隐藏 -->
                     <div id="cited_by_info" class="content-box" style="display:none;">
-                        <!-- 使用 Jinja2 语法插入信息 -->
-                        <p><strong>Cited by Total:</strong> {{ article.cited_by }}</p>
-
-                        {% for key, value in article.cited_by_articles.items() %}
-                            <div class="expander">
-                                <!-- 标题，带有 onclick 事件处理器，用于切换内容的可见性 -->
-                                <h4 onclick="toggleVisibility('Article{{ loop.index }}')"> Article {{ loop.index }} </h4>
-                                <!-- 内容部分，初始状态为隐藏 -->
-                                <div id="Article{{ loop.index }}" class="content-box" style="display:none;">
-                                    <!-- 使用 Jinja2 语法插入文章的摘要 -->
-                                    <p><strong>title:</strong> {{ value.title }}</p>
-                                    <p><strong>snippet:</strong>{{ value.snippet }}</p>
-                                </div>
-                            </div>
-                        {% endfor %}
+                        
                     </div>
                 </div>
             </div>
@@ -130,6 +116,31 @@
                 element.style.display = "none";
             }
         }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var citedByStatus = "{{ article.cited_by_articles.Status }}";
+        // 根据判断结果显示不同的内容
+        if (citedByStatus == "OK") {
+            document.getElementById('cited_by_info').innerHTML = `
+                <!-- 使用 Jinja2 语法插入信息 -->
+                <p><strong>Cited by Total:</strong> {{ article.cited_by_articles.cited_by_num }}</p>
+                {% for key, value in article.cited_by_articles.cited_by_details.items() %}
+                    <div class="expander">
+                        <!-- 标题，带有 onclick 事件处理器，用于切换内容的可见性 -->
+                        <h4 onclick="toggleVisibility('Article{{ loop.index }}')"> Article {{ loop.index }} </h4>
+                        <!-- 内容部分，初始状态为隐藏 -->
+                        <div id="Article{{ loop.index }}" class="content-box" style="display:none;">
+                            <!-- 使用 Jinja2 语法插入文章的摘要 -->
+                            <p><strong>title:</strong> {{ value.title }}</p>
+                            <p><strong>snippet:</strong> {{ value.snippet }} </p>
+                        </div>
+                    </div>
+                {% endfor %}`;
+        } else {
+            document.getElementById('cited_by_info').innerHTML = `<p><strong> {{ article.cited_by_articles.Error_info }} </strong></p>`;
+        }
+    });
     </script>
 </body>
 </html>

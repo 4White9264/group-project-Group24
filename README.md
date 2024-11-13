@@ -31,3 +31,18 @@ output = get_Section_B_output(pdf_name, article_name, translation)
 2. 前端部分新增404页面，用于处理非法路径
 3. 修改index.html，主要是把内容移到侧边栏，并增加了小组成员；引入了背景图片
 4. 修改style.css，增加了侧边栏和背景图片相关类的定义
+
+11/14/2024 凌晨-zzh：
+1. 修改被引用文章模块，增加错误反馈判断与处理，并修改相关前端页面
+2. 修改requirements.txt，解决其中模块冲突问题
+    · playwright==1.46.0
+    · pyee==11.1.0
+    · pyppeteer==2.0.0
+    · greenlet==3.0.3
+    · ↑以上包版本保持这样，不然会有冲突
+    · fitz ←这个包不需要，因为pdf解析用的包PyMuPDF在导入文件的时候用的也是import fitz， 这两个fitz不一样，单独下的话会出错
+    · 只下一个PyMuPDF足够了
+3. 遗留问题：
+    · 章节总结和逻辑链部分写的不完善导致ai反馈不尽人意--尚未修改
+    · 前端优化
+    · AI反馈时间太长？ ->建议考虑加点什么
