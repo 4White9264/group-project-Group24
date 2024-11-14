@@ -33,9 +33,9 @@ Example:
         "chapter2's title": "chapter1's summary",
         ......
     },
-    "Related work":{
+    "related_work":{
         "{article_name}": "The summary of this article's related work."
     },
-    "Logical Chain": "The overall logic of this article."
+    "logical_chain": "The overall logic of this article."
 }
 """
