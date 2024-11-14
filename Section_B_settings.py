@@ -14,20 +14,14 @@ The article is:
 "{article_text}"
 
 What you need to do is analyzing the article, and output the following Information:
-1. Chapters' title: Get each chapter's title of this article;
-2. Chapters' original text : Get each chapter's original text of this article;
-3. Chapters' summaries: Get each chapter's summary of this article;
-4. Related work: The summary of this article's related work;
-5. Logic Chain: Explain the argumentation process of this article in one paragraph.
+1. Chapters' title: Get each chapter's title of this article. The Chapters should include the abstract.
+2. Chapters' summaries: Get each chapter's summary of this article;
+3. Related work: The summary of this article's related work;
+4. Logic Chain: Explain the argumentation process of this article in one paragraph.
 
 Output in JSON format without ```json.
 Example:
 { 
-    "texts": {
-        "chapter1's title": "chapter1's original text",
-        "chapter2's title": "chapter2's original text",
-        ......
-    },
     "summaries":{
         "chapter1's title": "chapter1's summary",
         "chapter2's title": "chapter1's summary",

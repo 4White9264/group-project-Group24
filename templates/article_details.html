@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+    <div class="background-image-2">
     <!-- 页面内容的容器 -->
-    <div class="container">
+        <div class="container">
         <!-- 使用 Jinja2 语法插入文章标题 -->
         <h1>{{ article.title }}</h1>
         <!-- 使用 Jinja2 语法插入作者姓名 -->
@@ -29,20 +30,14 @@
 
                 <p><strong>Summary:</strong> {{ article.summary }}</p>
                 <!-- 使用 Jinja2 语法插入文章的片段 -->
-
                 <p><strong>Logical chain:</strong> {{ article.logical_chain }}</p>
-                <!-- 内部可展开的内容部分 -->
                 <div class="expander">
                     <!-- 标题，带有 onclick 事件处理器，用于切换内容的可见性 -->
-                    <h4 onclick="toggleVisibility('Summaries')">Each Chapter's Summary</h4>
-                    <!-- 内容部分，初始状态为隐藏 -->
-                    <div id="Summaries" class="content-box" style="display:none;">
-                        <!-- 使用 Jinja2 循环语法插入各个章节的总结 -->
-                        {% for key, value in article.Summaries.items() %}
-                            <p><strong>{{ key }}:</strong> {{ value }}</p>
-                        {% endfor %}
+                    <h4 onclick="toggleVisibility('Sec_B_AI_Resp')">Each Chapter's Summary</h4>
+                    <div id="Sec_B_AI_Resp" class="content-box" style="display:none;">
                     </div>
                 </div>
+                
 
                 <div class="expander">
                     <!-- 标题，带有 onclick 事件处理器，用于切换内容的可见性 -->
@@ -104,6 +99,7 @@
             </div>
         </div>
     </div>
+    </div>
     <!-- JavaScript 函数，用于切换指定 id 的元素的可见性 -->
     <script>
         function toggleVisibility(id) {
@@ -139,6 +135,23 @@
                 {% endfor %}`;
         } else {
             document.getElementById('cited_by_info').innerHTML = `<p><strong> {{ article.cited_by_articles.Error_info }} </strong></p>`;
+        }
+    });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        var AiSecBStatus = "{{ article.SecB_Status }}";
+        // 根据判断结果显示不同的内容
+        if (AiSecBStatus == "OK") {
+            document.getElementById('Sec_B_AI_Resp').innerHTML = `
+                <!-- 内容部分，初始状态为隐藏 -->
+                <div id="Sec_B_AI_Resp" class="content-box">
+                    <!-- 使用 Jinja2 循环语法插入各个章节的总结 -->
+                    {% for key, value in article.Summaries.items() %}
+                        <p><strong>{{ key }}:</strong> {{ value }}</p>
+                    {% endfor %}`;
+        } else {
+            document.getElementById('Sec_B_AI_Resp').innerHTML = `<p><strong> {{ article.SecB_Error }} </strong></p>`;
         }
     });
     </script>

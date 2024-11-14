@@ -59,8 +59,9 @@ def get_article_details(title):
         'cited_by_articles': Section_B_output.get('cited_by', {}),  # 从 Section_B_output 获取前三篇引用的文章信息
         'related_work': Section_B_output.get('related_work', {}),  # 从 Section_A_output 获取相关工作
         'logical_chain': Section_B_output.get('logical_chain', 'N/A'),  # 从 Section_B_output 获取逻辑链
-        # 'Abstract': Section_B_output.get('summaries', {}).get('Abstract', 'N/A'),  # 从 Section_B_output 获取摘要
-        'Summaries': Section_B_output.get('summaries', {}),  # 从 Section_B_output 获取各章节总结
+        'Summaries': Section_B_output.get('summaries', {'a':'b'}),  # 从 Section_B_output 获取各章节总结
+        'SecB_Status': Section_B_output.get('AI_Status', 'N/A'),  # 从 Section_B_output 获取 AI 状态
+        'SecB_Error': Section_B_output.get('Error', 'N/A'),  # 从 Section_B_output 获取错误信息
         # 'google_scholar_profile': Section_A_output.get('author_info', {}).get('google_scholar_profile', 'N/A'),  # 从 Section_A_output 获取 Google Scholar 个人资料
         # 'search_link': Section_A_output.get('author_info', {}).get('search_link', 'N/A')  # 从 Section_A_output 获取搜索链接
        

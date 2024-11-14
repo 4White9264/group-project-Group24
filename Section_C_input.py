@@ -46,6 +46,7 @@ Section_A_output = {
 
 
 Section_B_output = {
+    "AI_Status": "OK",
     "summaries": {
         'Abstract': 'This paper proposes a self-modeling based diagnosis system aimed at addressing challenges such as scalability and resiliency within Software-Defined Networks (SDN) and Network Functions Virtualization (NFV). The authors introduce templates for modeling network components, facilitating runtime generation of diagnosis models.',
         'I. INTRODUCTION': 'The introduction discusses the significance of SDN and NFV in improving network management and reducing operational costs, highlighting challenges like resiliency that necessitate self-diagnosis mechanisms to enhance network recovery processes.',
@@ -59,10 +60,9 @@ Section_B_output = {
         "Self-Modeling Based Diagnosis of Software-Defined Networks": "The related work highlights existing approaches to model-based diagnosis primarily focused on static topologies, discussing their shortcomings in handling dynamically changing environments, especially in the context of SDN and NFV. The paper advances the state of the art by proposing a self-modeling diagnosis that dynamically constructs dependency graphs while considering finer granularities of network components."
     },
     "logical_chain": "The article presents a comprehensive argumentation process that starts by identifying key challenges in diagnosing software-defined and virtualized network environments, leading to the proposal of a self-modeling framework that systematically constructs detailed dependency graphs necessary for effective diagnosis. The method enhances diagnosis granularity and automation while addressing the limitations of existing models, establishing a well-supported case for improving network resiliency through self-diagnosing capabilities.",
-    
     "cited_by": {
         "Status": "OK",
-        "cited_by_num": 21,
+        "cited_by_num": 5,
         "cited_by_details":{
             'cited_by_0': {
                 'title': 'Automatic belief network modeling via policy inference for SDN fault localization', 

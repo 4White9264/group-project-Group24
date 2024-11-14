@@ -24,11 +24,11 @@ def answer(article_summary, translation = "English"):
     )
 
     # 打印响应的 JSON 数据以进行调试
-    # print("Response JSON:", response.json())
-    # print("/*---------------------------------------------------------------*/")
+    print("Response JSON:", response.json())
+    print("/*---------------------------------------------------------------*/")
     # 检查响应状态码
     if response.status_code != 200:
-        raise Exception(f"API 请求失败，状态码: {response.status_code}, 错误信息: {response.json()}")
+        raise Exception(f"API request error, status: {response.status_code}, info: {response.json()}")
 
     # 解析响应数据
     try:
@@ -37,6 +37,6 @@ def answer(article_summary, translation = "English"):
             content = resp['choices'][0]['message']['content']
             return content
         else:
-            raise KeyError("响应中没有 'choices' 键或 'choices' 为空")
+            raise KeyError("No key named 'choices' of the value of 'choices' is empty in Response.")
     except KeyError as e:
-        raise KeyError(f"解析响应数据时出错: {e}")
+        raise KeyError(f"Some wrong in parsing data: {e}")

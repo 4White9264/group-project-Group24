@@ -46,3 +46,7 @@ output = get_Section_B_output(pdf_name, article_name, translation)
     · 章节总结和逻辑链部分写的不完善导致ai反馈不尽人意--尚未修改
     · 前端优化
     · AI反馈时间太长？ ->建议考虑加点什么
+
+11/14/2024 下午-zzh：
+1. 优化Section B不分逻辑，增加了错误处理模块，完善了prompt设计
+2. 主要前端页面增加背景图片

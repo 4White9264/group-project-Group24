@@ -7,7 +7,8 @@ def get_Section_B_output(pdf_name, article_name, translation = "English"):
     output_dict_2 = get_cited_by(article_name)
 
     Section_B_output = {
-        "summaries": output_dict_1.get("summaries", {}),
+        "AI_Status": output_dict_1.get("AI_Status", "N/A"),
+        "summaries": output_dict_1.get('summaries', {'c':'d'}),
         "related_work": output_dict_1.get("related_work", {}),
         "logical_chain": output_dict_1.get("logical_chain", {}),
         "cited_by": output_dict_2
