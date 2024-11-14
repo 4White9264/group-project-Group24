@@ -11,9 +11,9 @@ app = Flask(__name__)
 def get_article_details(title):
     # 为了测试目的，我们直接使用提供的数据
 
-    # 在你的代码调通直接别解开这个，会耗费我的AI配额，不解开用的就是input.py里的数据
-    Section_D_output = summary(title)
-    Section_B_output = get_Section_B_output(title, title, "English")
+    # # 在你的代码调通直接别解开这个，会耗费我的AI配额，不解开用的就是input.py里的数据
+    # Section_D_output = summary(title)
+    # Section_B_output = get_Section_B_output(title, title, "English")
 
     first_author_info_latest_three_pub = Section_D_output.get('First Author Info', {}).get('latest_three_publications', [])
     formated1 = f"\n{first_author_info_latest_three_pub[0][0]}, {first_author_info_latest_three_pub[0][1]}"
