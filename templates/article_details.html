@@ -9,6 +9,15 @@
     <title>{{ article.title }}</title>
     <!-- 链接到一个 CSS 样式表，用于页面样式 -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        .button-container {
+            margin-top: 20px;
+        }
+        .button-container form {
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="background-image-2">
@@ -98,7 +107,24 @@
                 </div>
             </div>
         </div>
+
+        <!-- 添加下载按钮 -->
+        <div class="button-container">
+            <form action="/download_excel" method="get">
+                <input type="hidden" name="title" value="{{ article.title }}">
+                <button type="submit">Download Excel</button>
+            </form>
+
+            <form action="/download_pdf" method="get">
+                <input type="hidden" name="title" value="{{ article.title }}">
+                <button type="submit">Download PDF</button>
+            </form>
+        </div>
+
     </div>
+
+    </div>
+
     </div>
     <!-- JavaScript 函数，用于切换指定 id 的元素的可见性 -->
     <script>

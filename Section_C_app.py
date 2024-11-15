@@ -117,4 +117,4 @@ def catch_all(path):
 
 # 启动 Flask 应用
 if __name__ == '__main__':
-    app.run(debug=True, port=5017)  # 启动 Flask 应用，启用调试模式，设置端口为 5017
+    app.run(debug=True, port=5002)  # 启动 Flask 应用，启用调试模式，设置端口为 5017
