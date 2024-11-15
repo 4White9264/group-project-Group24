@@ -88,6 +88,7 @@ Section_B_output = {
 
 Section_D_output = {
     "ID": "http://arxiv.org/abs/2402.06909v2",
+    "PDF Link": "http://arxiv.org/pdf/2402.06909v2",
     "Published": "2024-02-10",
     "Updated": "2024-02-13",
     "Title": "Noncommutative Poisson structure and invariants of matrices",

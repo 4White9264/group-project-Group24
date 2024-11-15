@@ -1,3 +1,4 @@
+import requests 
 from flask import Flask, render_template, request, send_file
 import pandas as pd
 from io import BytesIO
@@ -105,10 +106,17 @@ def download_excel():
 # 定义路由，处理 /download_pdf 路径的 GET 请求
 @app.route('/download_pdf')
 def download_pdf():
-    title = request.args.get('title')  # 获取请求参数中的文章标题
-    article = get_article_details(title)  # 获取文章详情
-    pdf_link = article['pdf_link']  # 获取 PDF 链接
-    return send_file(pdf_link, as_attachment=True, download_name="article.pdf", mimetype='application/pdf')  # 发送 PDF 文件给客户端
+    title = request.args.get('title')
+    article = get_article_details(title)
+    pdf_url = article['pdf_link']
+    
+    # Download the PDF file from the URL
+    response = requests.get(pdf_url)
+    if response.status_code == 200:
+        pdf_data = BytesIO(response.content)
+        return send_file(pdf_data, as_attachment=True, download_name="article.pdf", mimetype='application/pdf')
+    else:
+        return "Failed to download PDF", 404
 
 # 定义路由，处理 404 错误
 @app.route('/<path:path>')
@@ -117,4 +125,4 @@ def catch_all(path):
 
 # 启动 Flask 应用
 if __name__ == '__main__':
-    app.run(debug=True, port=5002)  # 启动 Flask 应用，启用调试模式，设置端口为 5017
+    app.run(debug=True, port=5008)  # 启动 Flask 应用，启用调试模式，设置端口为 5017
