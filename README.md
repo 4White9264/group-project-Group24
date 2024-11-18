@@ -50,3 +50,10 @@ output = get_Section_B_output(pdf_name, article_name, translation)
 11/14/2024 下午-zzh：
 1. 优化Section B不分逻辑，增加了错误处理模块，完善了prompt设计
 2. 主要前端页面增加背景图片
+
+11/19/2024 晚上-zzh：
+reloading问题：之前添加了一个图片打压缩包打的逻辑，这个逻辑在打包的过程中会多次修改zip文件，导致web应用在debug模式下因为后台文件被修改而多次重启，最终使服务中断
+修改方法：
+1. 关闭debug模式：app.py中将debug参数设置为False
+2. 关闭打包功能：Section_B_pdf_processing.py中注释掉line 18
+其他修改：运行xlsx download的时候报错没有xlsxwriter包，加到requirements.txt里面了

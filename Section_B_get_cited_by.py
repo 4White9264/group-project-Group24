@@ -56,9 +56,9 @@ def get_cited_by(article_title):
             if i >= 2:
                 break
 
-        #print(output_dict)
-        #print("/*------------------------------------------------------*/")
-
+        print(output_dict)
+        print("/*------------------------------------------------------*/")
+        
         return output_dict
     
     # 若请求不成功：

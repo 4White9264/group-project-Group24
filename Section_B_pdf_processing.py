@@ -15,7 +15,7 @@ def pdf_to_txt(pdf_name):
         text = extract_text_and_images(page, i, pdf_name)
         pdf_txt += text + '\n'
     # 压缩图片目录以供用户下载
-    zip_dir(f"image/{pdf_name}")
+    # zip_dir(f"image/{pdf_name}")
     # 过滤或处理文本
     # 去除空行
     pdf_list = pdf_txt.split('\n')

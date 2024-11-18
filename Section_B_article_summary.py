@@ -34,6 +34,8 @@ def get_context_and_feedback_from_ai(pdf_name, article_name, translation = "Engl
         # print("/*---------------------------------------------------------------*/")
         output_dict['text'] = dict(zip(titles, article_text_list[1:]))
         output_dict['AI_Status'] = "OK"
+        #print(output_dict)
+        #print("/*---------------------------------------------------------------*/")
         return output_dict
     except Exception as e:
         return {

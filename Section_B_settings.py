@@ -3,7 +3,7 @@ serpapi_key = "87e734f6134fcb72e3c2f4f9f3e0a2aa9435e0903ce9a205d8d7e9024abb05a0"
 engine = "google_scholar"
 
 # AI接口调用
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = "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"
 MODEL = "openai/gpt-4o-mini-2024-07-18"
 AI_URL = "https://openrouter.ai/api/v1/chat/completions"
 SYSTEM_PROMPT = """
