@@ -4,6 +4,8 @@ import json
 article_title = "Noncommutative Poisson structure and invariants of matrices"
 result = summary(article_title)
 
+print(result)
+
 
 # print(result.get("Evaluation from AI", "N/A"))
 
